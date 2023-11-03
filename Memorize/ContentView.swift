@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    let emojis: [String] = [ "😤", "😇", "🤔", "😃", "😃" ]
+    
     var body: some View {
         HStack {
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-            CardView()
+            ForEach(emojis.indices, id: \.self) { index in
+                CardView(content: emojis[index])
+            }
             //changed something
         }
         .foregroundColor(.orange)
@@ -22,9 +23,10 @@ struct ContentView: View {
 }
 
 struct CardView: View {
+    let content: String
     // Views are immutable but their body can be changed
     // "@State" is just for small things
-    @State var isFaceUp = false
+    @State var isFaceUp = true
     
     var body: some View {
         ZStack() {
@@ -32,7 +34,7 @@ struct CardView: View {
             if isFaceUp {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
-                Text("😤").font(.largeTitle)
+                Text(content).font(.largeTitle)
             }else {
                 base.fill()
             }
