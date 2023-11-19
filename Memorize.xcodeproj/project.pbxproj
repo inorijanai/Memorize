@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		996C42012B075A1400115B8C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996C42002B075A1400115B8C /* Theme.swift */; };
 		99A17C1B2B0208C7000A8F03 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A17C1A2B0208C7000A8F03 /* MemoryGame.swift */; };
 		99A17C1D2B020C2F000A8F03 /* EmojiMemorizeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A17C1C2B020C2F000A8F03 /* EmojiMemorizeGame.swift */; };
 		99CF5CCA2AE6491000B57C2A /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CF5CC92AE6491000B57C2A /* MemorizeApp.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		996C42002B075A1400115B8C /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		99A17C1A2B0208C7000A8F03 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		99A17C1C2B020C2F000A8F03 /* EmojiMemorizeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemorizeGame.swift; sourceTree = "<group>"; };
 		99CF5CC62AE6491000B57C2A /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +57,7 @@
 		99CF5CC82AE6491000B57C2A /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				996C42002B075A1400115B8C /* Theme.swift */,
 				99CF5CC92AE6491000B57C2A /* MemorizeApp.swift */,
 				99CF5CCB2AE6491000B57C2A /* EmojiMemoryGameView.swift */,
 				99A17C1A2B0208C7000A8F03 /* MemoryGame.swift */,
@@ -145,6 +148,7 @@
 			files = (
 				99A17C1D2B020C2F000A8F03 /* EmojiMemorizeGame.swift in Sources */,
 				99CF5CCC2AE6491000B57C2A /* EmojiMemoryGameView.swift in Sources */,
+				996C42012B075A1400115B8C /* Theme.swift in Sources */,
 				99CF5CCA2AE6491000B57C2A /* MemorizeApp.swift in Sources */,
 				99A17C1B2B0208C7000A8F03 /* MemoryGame.swift in Sources */,
 			);

@@ -8,36 +8,27 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    @State var emojis: [String] = []
+//    @State var emojis: [String] = []
     
     // Don't do this actually
-    var viewModel: EmojiMemorizeGame
-    
-    let emotions = ["🥹", "😅", "☺️", "😇", "😫", "😭", "😡", "😢", "🥶", "😱"]
-    let animals = ["🐶", "🐱", "🐭", "🐰", "🦊", "🐻", "🐮", "🐷"]
-    let weathers = ["☀️", "🌤️", "☁️", "🌧️", "⛈️", "💦", "☔️", "⛄️", "🌈"]
-    
+    @State var viewModel: EmojiMemorizeGame
+
     var body: some View {
-        VStack{
-            title
-            Button("shuffle") {
-                viewModel.shuffle()
+        Group{
+            Text("Current Theme: \(viewModel.themeName)")
+                .font(.title)
+            Text("Scores: \(viewModel.score)")
+            Button("New Game") {
+                viewModel = EmojiMemorizeGame()
             }
             ScrollView{
-                cards
-                    .animation(.default, value: viewModel.cards)
+                cards.animation(.default, value: viewModel.cards)
             }
-            Spacer()
-            themeSwichers
+            .padding([.leading, .bottom, .trailing])
         }
-        .padding()
+        .foregroundColor(viewModel.color)
     }
-    
-    var title: some View{
-        Text("Memorize!")
-            .font(.largeTitle)
-    }
-    
+
     var cards: some View{
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)], spacing: 0) {
             ForEach(viewModel.cards) { card in
@@ -49,65 +40,8 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(.orange)
+        .foregroundColor(viewModel.color)
     }
-    
-//    var cardCountAdjusters: some View {
-//        HStack{
-//            cardRemover
-//            cardAdder
-//        }
-//        .imageScale(.large)
-//        .font(.largeTitle)
-//    }
-    
-    func themeSelector(by theme: String, symbol: String, lebal: String) -> some View{
-        Button(action: {
-            switch theme {
-            case "emotion":
-                emojis = (emotions + emotions).shuffled()
-            case "animal":
-                emojis = (animals + animals).shuffled()
-            case "weather":
-                emojis = (weathers + weathers).shuffled()
-            default:
-                print("No such theme")
-            }
-        }, label: {
-            VStack{
-                Image(systemName: symbol).font(.title).imageScale(.large)
-                Text(lebal)
-            }
-        })
-    }
-    
-    var themeSwichers: some View {
-        HStack{
-            Group{
-                themeSelector(by: "emotion", symbol: "face.smiling", lebal: "Emotions")
-                themeSelector(by: "animal", symbol: "globe.asia.australia", lebal: "Animals")
-                themeSelector(by: "weather", symbol: "sun.max", lebal: "Weathers")
-            }.padding([.top, .leading, .trailing])
-        }
-//        .font(.largeTitle)
-    }
-    
-//    func cardAdjuster(by offset: Int, symbol: String) -> some View {
-//        Button(action: {
-//            
-//        }, label: {
-//            Image(systemName: symbol)
-//        })
-////        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
-//    }
-    
-//    var cardRemover: some View {
-//        cardAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
-//    }
-//    
-//    var cardAdder: some View {
-//        cardAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
-//    }
 }
 
 struct CardView: View {

@@ -18,12 +18,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             cards.append(Card(content: content, id: "\(pairIndex+1)a"))
             cards.append(Card(content: content, id: "\(pairIndex+1)b"))
         }
+        cards.shuffle()
+//        print(cards)
     }
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { index in cards[index].isFaceUp }.only }
         set { cards.indices.forEach { cards[$0].isFaceUp = (newValue == $0) } }
     }
+    
+    private(set) var score = 0
     
     mutating func choose(_ card: Card) {
 //        print("chose \(card.id)")
@@ -35,6 +39,18 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                         // bingo
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
+                        score += 2
+                    }else {
+                        // not bingo
+                        if(cards[chosenIndex].isSeen) {
+                            if(cards[potentialMatchIndex].isSeen) {
+                                score -= 2
+                            }else {
+                                score -= 1
+                            }
+                        }
+                        cards[chosenIndex].isSeen = true
+                        cards[potentialMatchIndex].isSeen = true
                     }
                 }else {
                     indexOfTheOneAndOnlyFaceUpCard = chosenIndex
@@ -49,17 +65,21 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
 //        print(cards)
     }
     
+    mutating func newGame() {
+        cards.indices.forEach { index in cards[index].reset() }
+    }
+    
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible{
-        // don't need this is all vars is equatable
-//        static func == (lhs: Card, rhs: Card) -> Bool {
-//            return lhs.isFaceUp == rhs.isFaceUp &&
-//            lhs.isMatched == rhs.isMatched &&
-//            lhs.content == rhs.content
-//        }
-        
+      
         var isFaceUp = false
         var isMatched = false
+        var isSeen = false
         let content: CardContent
+        
+        mutating func reset() {
+            isFaceUp = false
+            isMatched = false
+        }
         
         var id: String
         var debugDescription: String {
